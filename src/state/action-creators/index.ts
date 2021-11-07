@@ -6,7 +6,6 @@ import { Dispatch } from 'redux';
 const endpoint = process.env.REACT_APP_SPACEX_END_POINT as string;
 const config = {
     headers: {
-        "x-api-key": process.env.REACT_APP_SPACEX_X_API_KEY as string,
     },
 };
 
