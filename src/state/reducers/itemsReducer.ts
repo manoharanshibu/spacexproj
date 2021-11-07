@@ -3,12 +3,17 @@ import { ActionType } from '../action-types/index';
 
 const initialState = {
     vote: 0,
-    items: []
+    items: [],
+    loadedITems: false,
+    showRocketDetails: false,
+    selectedRocket: null
 };
 
 type item = {
     items: [],
     loadedItems: boolean,
+    showRocketDetails: boolean,
+    selectedRocket: any
 }
 
 const itemsReducer = (state: any = initialState, action: Action) => {
@@ -19,6 +24,12 @@ const itemsReducer = (state: any = initialState, action: Action) => {
                 loadedItems: true,
                 items: action.payload
             };
+        case ActionType.SHOW_ROCKET_DETAILS:
+            return {
+                ...state,
+                showRocketDetails: action.payload.showRocketDetails,
+                selectedRocket: action.payload.selectedRocket
+            }
         default:
             return state;
     }

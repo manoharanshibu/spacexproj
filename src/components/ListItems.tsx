@@ -2,7 +2,8 @@ import * as React from "react";
 import moment from 'moment';
 import { useEffect, useState } from "react";
 import { AgGridColumn, AgGridReact, } from 'ag-grid-react';
-import Link from "@material-ui/core/Link";
+import RocketDialog from '../ui/RocketDialog';
+import { ActionType } from '../state/action-types/index'
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
@@ -66,7 +67,13 @@ const ListItems = () => {
   const onRowClicked = (e: any) => {
     if (e.event.target.name === 'rocket-link') {
       // TODO: detailed view
-      alert(e.data['rocket'].rocket_name)
+      dispatch({
+        type: ActionType.SHOW_ROCKET_DETAILS,
+        payload: {
+          showRocketDetails: true,
+          selectedRocket: e.data["rocket"]
+        }
+    });
     }
   }
 
@@ -78,6 +85,7 @@ const ListItems = () => {
 
   return (
     <div className="ag-theme-alpine container">
+      <RocketDialog />
       {items && <AgGridReact rowData={rowData} onRowClicked={onRowClicked} onRowDoubleClicked={onRowDoubleClicked} domLayout={'autoHeight'}>
         {
           columnDefs.map(column => {

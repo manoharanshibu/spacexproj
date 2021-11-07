@@ -5,4 +5,9 @@ interface IGetItemsSuccessAction {
     payload: any
 }
 
-export type Action = IGetItemsSuccessAction
+interface IShowRocketActions {
+    type: ActionType.SHOW_ROCKET_DETAILS
+    payload: any
+}
+
+export type Action = IGetItemsSuccessAction | IShowRocketActions
