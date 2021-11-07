@@ -1,10 +1,14 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 
-const Header = () => {
+interface IProps {
+    title: string
+}
+
+const Header: React.FC<IProps> = ({ title }) => {
     const history = useHistory()
     return (
-        <div className="header" onClick={() => history.push('/')}><div className="header-text">SPCACE-X</div></div>
+        <div className="header" onClick={() => history.push('/')}><div className="header-text" data-testid="header" role="title">{title}</div></div>
     )
 }
 

@@ -13,7 +13,7 @@ const BaseLayout = () => {
 
   return (
     <>
-      <Header />
+      <Header title='SPACE-X' />
       <AppRoutes />
     </>
   );
