@@ -10,16 +10,15 @@ const config = {
 };
 
 export const fetchItems = () => {
-    return (dispatch: Dispatch<Action>) => {
-        axios.get(`${endpoint}/`, config)
-            .then(response => {
-                dispatch({
-                    type: ActionType.GET_ITEMS_SUCCESS,
-                    payload: response.data
-                });
-            })
-            .catch(error => {
-                // TODO: handle the error
-            })
+    return async (dispatch: Dispatch<Action>) => {
+        const response = await axios.get(`${endpoint}/`, config);
+        try {
+            dispatch({
+                type: ActionType.GET_ITEMS_SUCCESS,
+                payload: response ? response.data : []
+            });
+        } catch(error) {
+            console.error(error);
+        }
     }
 }

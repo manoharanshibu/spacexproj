@@ -2,9 +2,8 @@ import { Action } from '../actions/index';
 import { ActionType } from '../action-types/index';
 
 const initialState = {
-    vote: 0,
     items: [],
-    loadedITems: false,
+    loadedItems: false,
     showRocketDetails: false,
     selectedRocket: null
 };

@@ -66,7 +66,6 @@ const ListItems = () => {
 
   const onRowClicked = (e: any) => {
     if (e.event.target.name === 'rocket-link') {
-      // TODO: detailed view
       dispatch({
         type: ActionType.SHOW_ROCKET_DETAILS,
         payload: {
@@ -86,10 +85,10 @@ const ListItems = () => {
   return (
     <div className="ag-theme-alpine container">
       <RocketDialog />
-      {items && <AgGridReact rowData={rowData} onRowClicked={onRowClicked} onRowDoubleClicked={onRowDoubleClicked} domLayout={'autoHeight'}>
+      {items && <AgGridReact data-testid="ag-grid-react" rowData={rowData} onRowClicked={onRowClicked} onRowDoubleClicked={onRowDoubleClicked} domLayout={'autoHeight'}>
         {
-          columnDefs.map(column => {
-            return <AgGridColumn resizable={true} width={250} sortable={column.isSortable} filter={column.isFilterable} headerName={column.headerName} field={column.field} cellRenderer={column.cellRenderer}></AgGridColumn>
+          columnDefs.map((column, index) => {
+            return <AgGridColumn key={`ag-grid-column${index}`} resizable={true} width={250} sortable={column.isSortable} filter={column.isFilterable} headerName={column.headerName} field={column.field} cellRenderer={column.cellRenderer}></AgGridColumn>
           })
         }
       </AgGridReact>}
