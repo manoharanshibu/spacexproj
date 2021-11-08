@@ -87,7 +87,7 @@ const RocketDialog: React.FC<IProps> = (props) => {
 
     return (
         <Dialog
-            open={open}
+            open={open === true ? true : false}
             onClose={handleClose}
             PaperComponent={PaperComponent}
             aria-labelledby="draggable-dialog-title"
