@@ -1,8 +1,18 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import renderer from 'react-test-renderer';
+
 import Header from './Header';
 
 describe(('Header Component'), () => {
+
+    it('renders correctly', () => {
+        const tree = renderer
+            .create(<Header title='SPACE-X' />)
+            .toJSON();
+        expect(tree).toMatchSnapshot();
+    });
+
     it('should render the title text', () => {
         render(<Header title='SPACE-X' />);
         const linkElement = screen.getByText(/SPACE-X/i);
@@ -19,11 +29,5 @@ describe(('Header Component'), () => {
         render(<Header title='SPACE-X' />);
         const linkElement = screen.getByTestId('header');
         expect(linkElement).toBeVisible();
-    });
-
-    it('should have the title role set', () => {
-        render(<Header title='SPACE-X' />);
-        const linkElement = screen.getByRole('title');
-        expect(linkElement).toHaveTextContent('SPACE-X');
     });
 })

@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchItems } from "../state/action-creators";
 
 import { MAX_ITEMS } from '../AppConstants';
+import { RowClickedEvent } from "ag-grid-community";
 
 const ListItems = () => {
   const dispatch = useDispatch();
@@ -72,11 +73,11 @@ const ListItems = () => {
           showRocketDetails: true,
           selectedRocket: e.data["rocket"]
         }
-    });
+      });
     }
   }
 
-  const onRowDoubleClicked = (e: any) => {
+  const onRowDoubleClicked = (e: RowClickedEvent) => {
     if (e.data["links"].article_link) {
       window.open(e.data["links"].article_link, '_blank');
     }
@@ -84,8 +85,8 @@ const ListItems = () => {
 
   return (
     <div className="ag-theme-alpine container">
-      <RocketDialog />
-      {items && <AgGridReact data-testid="ag-grid-react" rowData={rowData} onRowClicked={onRowClicked} onRowDoubleClicked={onRowDoubleClicked} domLayout={'autoHeight'}>
+      <RocketDialog open={false} />
+      {items && <AgGridReact data-testid="ag-grid-react" rowData={rowData} onCellClicked={onRowClicked} onRowDoubleClicked={onRowDoubleClicked} domLayout={'autoHeight'}>
         {
           columnDefs.map((column, index) => {
             return <AgGridColumn key={`ag-grid-column${index}`} resizable={true} width={250} sortable={column.isSortable} filter={column.isFilterable} headerName={column.headerName} field={column.field} cellRenderer={column.cellRenderer}></AgGridColumn>

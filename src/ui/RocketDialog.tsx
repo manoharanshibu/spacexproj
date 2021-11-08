@@ -17,6 +17,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
+import './RocketDialog.scss';
 
 const PaperComponent = (props: any) => {
     return (
@@ -29,18 +30,18 @@ const PaperComponent = (props: any) => {
     );
 }
 
-const DraggableDialog = () => {
-    const [open, setOpen] = useState(false);
+interface IProps {
+    open: boolean
+}
+
+const RocketDialog: React.FC<IProps> = (props) => {
+    const [open, setOpen] = useState(props.open);
     const dispatch = useDispatch();
     const { showRocketDetails, selectedRocket } = useSelector((state: State) => state.itemsReducer);
 
     useEffect(() => {
         setOpen(showRocketDetails);
     }, [showRocketDetails])
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
 
     const handleClose = () => {
         setOpen(false);
@@ -85,29 +86,27 @@ const DraggableDialog = () => {
     }
 
     return (
-        <div>
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                PaperComponent={PaperComponent}
-                aria-labelledby="draggable-dialog-title"
-            >
-                <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-                    Rocket Details
+        <Dialog
+            open={open}
+            onClose={handleClose}
+            PaperComponent={PaperComponent}
+            aria-labelledby="draggable-dialog-title"
+        >
+            <DialogTitle className='dialog-title' id="draggable-dialog-title" data-testid="draggable-dialog-title">
+                Rocket Details
                 </DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        {getDetails()}
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button autoFocus onClick={handleClose}>
-                        Close
+            <DialogContent>
+                <DialogContentText>
+                    {getDetails()}
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Button autoFocus onClick={handleClose}>
+                    Close
                     </Button>
-                </DialogActions>
-            </Dialog>
-        </div>
+            </DialogActions>
+        </Dialog>
     );
 }
 
-export default DraggableDialog;
+export default RocketDialog;
